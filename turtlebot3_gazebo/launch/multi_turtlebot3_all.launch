@@ -10,28 +10,34 @@
   <!-- Launch three robots in the house -->
   <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
     <arg name="ns" value="tb3_0"/>
-    <arg name="tb3_x_pos" value="-31.3"/>
-    <arg name="tb3_y_pos" value="-8.5"/>
+    <arg name="tb3_x_pos" value="-31"/>
+    <arg name="tb3_y_pos" value="-8"/>
     <arg name="tb3_z_pos" value="0.0"/>
-    <arg name="tb3_yaw" value="0.0"/>
-  </include>  
-  
-  <!-- <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
-    <arg name="ns" value="tb3_1"/>
-    <arg name="tb3_x_pos" value="0.5"/>
-    <arg name="tb3_y_pos" value="-0.5"/>
-    <arg name="tb3_z_pos" value="0.0"/>
-    <arg name="tb3_yaw" value="0.0"/>
+    <arg name="tb3_yaw" value="0.0"/>  
+    <arg name="role" value="1"/>
+    <arg name="parent_name" value="tb3_1"/>
+    <arg name="child_name" value=""/>
   </include>  
   
   <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
-    <arg name="ns" value="tb3_2"/>
-    <arg name="tb3_x_pos" value="-0.5"/>
-    <arg name="tb3_y_pos" value="-0.5"/>
+    <arg name="ns" value="tb3_1"/>
+    <arg name="tb3_x_pos" value="-32"/>
+    <arg name="tb3_y_pos" value="-8"/>
     <arg name="tb3_z_pos" value="0.0"/>
     <arg name="tb3_yaw" value="0.0"/>
+    <arg name="role" value="0"/>
+    <arg name="parent_name" value="data_center"/>
+    <arg name="child_name" value="tb3_0"/>
   </include>  
-   -->
+  
+  <!-- <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
+    <arg name="ns" value="tb3_2"/>
+    <arg name="tb3_x_pos" value="-31"/>
+    <arg name="tb3_y_pos" value="-7"/>
+    <arg name="tb3_z_pos" value="0.0"/>
+    <arg name="tb3_yaw" value="0.0"/>
+  </include>   -->
+  
   <!-- <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
     <arg name="ns" value="tb3_3"/>
     <arg name="tb3_x_pos" value="-0.5"/>
@@ -45,8 +51,13 @@
 
   <!-- Start rviz -->
   <group if="$(arg open_rviz)"> 
-    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_slam)/rviz/turtlebot3_$(arg slam_methods).rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_gazebo)/rviz/path_following.rviz"/>
   </group>
 
+  <node pkg="mdis_state_machine" type="connection_check" name="connection_check" args="3"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="world_to_bot_0_tf_broadcaster"  args="0 0 0 0 0 0 /map /tb3_0/map 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="world_to_bot_1_tf_broadcaster"  args="0 0 0 0 0 0 /map /tb3_1/map 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="world_to_bot_2_tf_broadcaster"  args="0 0 0 0 0 0 /map /tb3_2/map 100"/>
 
 </launch>

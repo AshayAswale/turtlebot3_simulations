@@ -8,6 +8,10 @@
   <arg name="tb3_yaw"   default=" 1.57"/>
   <arg name="map_file" default="$(find turtlebot3_gazebo)/maps/map.yaml"/>
 
+  <arg name="role" default="1"/>
+  <arg name="parent_name" default=""/>
+  <arg name="child_name" default=""/>
+
   <group ns = "$(arg ns)">
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
 
@@ -17,6 +21,8 @@
     </node>
     
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg ns) -x $(arg tb3_x_pos) -y $(arg tb3_y_pos) -z $(arg tb3_z_pos) -Y $(arg tb3_yaw) -param robot_description" />
+
+    <node name="team_scheduler" pkg="mdis_state_machine" type="team_scheduler" args="$(arg role) $(arg parent_name) $(arg child_name)"/>
   </group>
   
   <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_slam.launch">
