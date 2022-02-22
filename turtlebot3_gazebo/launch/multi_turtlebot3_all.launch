@@ -9,9 +9,16 @@
 
   <!-- Launch three robots in the house -->
   <include file="$(find turtlebot3_gazebo)/launch/multi_turtlebot3_single.launch">
-    <arg name="ns" value="tb3_0"/>
+    <!-- <arg name="ns" value="tb3_0"/>
     <arg name="tb3_x_pos" value="-31.3"/>
     <arg name="tb3_y_pos" value="-8.5"/>
+    <arg name="tb3_z_pos" value="0.0"/>
+    <arg name="tb3_yaw" value="0.0"/> -->
+
+    <!-- CHANGED FOR SMALLER MAZE!! -->
+    <arg name="ns" value="tb3_0"/>
+    <arg name="tb3_x_pos" value="-3.0"/>
+    <arg name="tb3_y_pos" value="-3.0"/>
     <arg name="tb3_z_pos" value="0.0"/>
     <arg name="tb3_yaw" value="0.0"/>
   </include>
@@ -49,5 +56,8 @@
   </group>
 
   <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix" args="0 0 0 0 0 0 1 map tb3_0/map 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom" args="0 0 0 0 0 0 1 map tb3_0/odom 10"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom_v2" args="0 0 0 0 0 0 1 tb3_0/map tb3_0/odom 10"/> -->
+
 
 </launch>
