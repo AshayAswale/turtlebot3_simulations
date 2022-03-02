@@ -38,9 +38,10 @@
     <arg name="ns" value="$(arg ns)"/>
   </include>   -->
 
-  <include file="$(find turtlebot3_gazebo)/launch/multi_move_base.launch">
+  <!-- CHANGED FOR RESTARTING MOVE BASE!! -->
+  <!-- <include file="$(find turtlebot3_gazebo)/launch/multi_move_base.launch">
     <arg name="ns" value="$(arg ns)"/>
-  </include>
+  </include> -->
 
   <!--<include file="$(find explore_lite)/launch/explore.launch">
     <arg name="ns" value="$(arg ns)"/>

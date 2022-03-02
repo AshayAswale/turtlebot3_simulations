@@ -7,6 +7,7 @@
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/dans_basic_maze.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
+    <!-- CHANGED 2 LINES FOR SINGULARITY!! -->
     <arg name="gui" value="true"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>
