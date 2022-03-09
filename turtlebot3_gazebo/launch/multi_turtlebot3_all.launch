@@ -4,7 +4,7 @@
   <arg name="slam_methods" default="gmapping" doc="slam type [gmapping, cartographer, hector, karto, frontier_exploration]"/>
   <arg name="configuration_basename" default="turtlebot3_lds_2d.lua"/>
   <!-- CHANGED FOR SINGULARITY!! -->
-  <arg name="open_rviz" default="false"/>
+  <arg name="open_rviz" default="true"/>
 
   <include file="$(find turtlebot3_gazebo)/launch/empty_world.launch"/>
 
@@ -57,7 +57,11 @@
   </group>
 
   <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix" args="0 0 0 0 0 0 1 map tb3_0/map 10"/>
-  <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom" args="0 0 0 0 0 0 1 map tb3_0/odom 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom" args="0 0 0 0 0 0 1 odom tb3_0/odom 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom2" args="0 0 0 0 0 0 1 map odom 10"/>
+
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom" args="0 0 0 0 0 0 1 map tb3_0/odom 10"/> -->
   <!-- <node pkg="tf" type="static_transform_publisher" name="multi_robot_frame_fix_odom_v2" args="0 0 0 0 0 0 1 tb3_0/map tb3_0/odom 10"/> -->
 
 
